@@ -8,6 +8,13 @@ use Webman\Captcha\PhraseBuilder;
 
 class UsersController
 {
+
+    public function login(Request $request)
+    {
+        $uniqueId = $request->cookie('unique_id');
+        $code = Redis::get($uniqueId);
+        return json(['code' => 0, 'message' => '登录成功']);
+    }
     public function code(Request $request)
     {
         $response = response();
@@ -20,7 +27,7 @@ class UsersController
         // 生成验证码
         $builder = $captcha->build(100);
         $unique_id = bin2hex(pack('d', microtime(true)).pack('N', mt_rand()));
-        $response->cookie('unique_id', $unique_id, 120);
+        $response->cookie('unique_id', $unique_id, 120, '/', '', false, false,true);
         // 将验证码的值存储到redis中
         Redis::setex($unique_id, 120, strtolower($builder->getPhrase()));
         // 获得验证码图片二进制数据

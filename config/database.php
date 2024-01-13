@@ -12,4 +12,28 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-return [];
+return [
+    // 默认数据库
+    'default' => 'mysql',
+
+    // 各种数据库配置
+    'connections' => [
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => '127.0.0.1',
+            'port' => 3306,
+            'database' => 'webman',
+            'username' => 'root',
+            'password' => '',
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+            'options' => [
+                \PDO::ATTR_TIMEOUT => 3
+            ]
+        ],
+    ],
+];

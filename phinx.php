@@ -9,13 +9,13 @@ return [
         "default_database" => "dev",
         "default_environment" => "dev",
         "dev" => [
-            "adapter" => "DB_CONNECTION",
-            "host" => "DB_HOST",
-            "name" => "DB_DATABASE",
-            "user" => "DB_USERNAME",
-            "pass" => "DB_PASSWORD",
-            "port" => "DB_PORT",
-            "charset" => "utf8"
+            "adapter" => "mysql",
+            "host" => "127.0.0.1",
+            "name" => "webman",
+            "user" => "root",
+            "pass" => "",
+            "port" => "3306",
+            "charset" => "utf8mb4"
         ]
     ]
 ];

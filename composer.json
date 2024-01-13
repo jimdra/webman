@@ -31,7 +31,9 @@
     "illuminate/redis": "^10.39",
     "illuminate/events": "^10.39",
     "ext-json": "*",
-    "robmorgan/phinx": "^0.15.5"
+    "robmorgan/phinx": "^0.15.5",
+    "illuminate/database": "^10.40",
+    "ext-pdo": "*"
   },
   "suggest": {
     "ext-event": "For better performance. "
