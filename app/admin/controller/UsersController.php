@@ -11,8 +11,15 @@ class UsersController
 
     public function login(Request $request)
     {
+        $json = $request->rawBody();
+        $post = json_decode($json, true);
+        var_export($post);
         $uniqueId = $request->cookie('unique_id');
         $code = Redis::get($uniqueId);
+        if ($code !== $post['captcha']) {
+            return json(['code' => 1, 'message' => '验证码错误']);
+        }
+        // 验证码正确，执行登录操作
         return json(['code' => 0, 'message' => '登录成功']);
     }
     public function code(Request $request)
@@ -27,7 +34,7 @@ class UsersController
         // 生成验证码
         $builder = $captcha->build(100);
         $unique_id = bin2hex(pack('d', microtime(true)).pack('N', mt_rand()));
-        $response->cookie('unique_id', $unique_id, 120, '/', '', false, false,true);
+        $response->cookie('unique_id', $unique_id, 120, '', '', true, false,'None');
         // 将验证码的值存储到redis中
         Redis::setex($unique_id, 120, strtolower($builder->getPhrase()));
         // 获得验证码图片二进制数据
