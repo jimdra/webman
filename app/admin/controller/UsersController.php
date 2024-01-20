@@ -29,6 +29,12 @@ class UsersController
         return json(['code' => 0, 'message' => '登录成功', 'data' => $user]);
     }
 
+    public function info(Request $request)
+    {
+        $user = $request->user();
+        return json(['code' => 0, 'message' => '获取用户信息成功', 'data' => $user]);
+    }
+
     public function code(Request $request)
     {
         $response = response();
